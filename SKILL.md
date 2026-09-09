@@ -34,13 +34,18 @@ script uses only the standard library, so no `pip install` is needed.
    python3 scripts/generate_image.py "<prompt>" "<output-file>" ["<model>"]
    ```
 
-   Model defaults to `@cf/black-forest-labs/flux-1-schnell`. Other useful models:
+   Model defaults to `@cf/black-forest-labs/flux-1-schnell` (best output quality of the
+   models tested). If the account's 10,000/day free neuron allocation runs out on that
+   model, the script automatically falls back to `@cf/bytedance/stable-diffusion-xl-lightning`,
+   which is not neuron-metered, so generation keeps working for the rest of the day. Other
+   useful models:
    - `@cf/stabilityai/stable-diffusion-xl-base-1.0`
    - `@cf/lykon/dreamshaper-8-lcm`
    - `@cf/bytedance/stable-diffusion-xl-lightning`
 
-4. Report the saved file path to the user. If the script errors, surface the
-   Cloudflare API error message rather than retrying blindly.
+4. Report the saved file path to the user, and mention if the fallback model was used
+   (the script prints this to stderr). If the script errors for any other reason, surface
+   the Cloudflare API error message rather than retrying blindly.
 
 ## Notes
 
@@ -48,5 +53,9 @@ script uses only the standard library, so no `pip install` is needed.
   `scripts/generate_image.py` already handles both, so prefer it over ad-hoc requests.
 - The script is pure Python standard library, so it runs the same way on macOS, Linux,
   and Windows.
+- `flux-1-schnell` costs real neurons (~173/image at default settings, confirmed via the
+  API's `cf-ai-neurons` header); `stable-diffusion-xl-base-1.0`, `stable-diffusion-xl-lightning`,
+  and `dreamshaper-8-lcm` are all confirmed unmetered (0 neurons), so they don't draw down
+  the daily budget at all.
 - Full model list and parameters: https://developers.cloudflare.com/workers-ai/models/
   (filter by task "Text-to-Image").
