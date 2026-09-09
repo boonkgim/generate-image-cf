@@ -3,9 +3,9 @@
 An [agent skill](https://agentskills.io) that generates an image from a text prompt
 using Cloudflare Workers AI, called directly from your AI agent.
 
-It sharpens a vague prompt, generates the image, and saves it locally. Uses the
-highest-quality model by default; switches automatically to a free model once the daily
-quota runs out.
+It sharpens a vague prompt, generates the image, and saves it locally. Defaults to the
+model that looked best against the free alternatives in testing; switches automatically
+to a free model once the daily quota runs out.
 
 ## Quick start
 
@@ -37,8 +37,8 @@ generate an image of a red fox in the snow using generate-image-cf
 
 Tools that support invoking a skill by name take `/generate-image-cf` directly.
 
-No browser automation, or no agent at all? [docs/SETUP.md](docs/SETUP.md) covers
-installing and setting up credentials by hand, and running the script directly.
+Want to set up manually instead? [docs/SETUP.md](docs/SETUP.md) covers installing and
+setting up credentials by hand, and running the script directly.
 
 ## Works with
 
