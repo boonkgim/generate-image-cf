@@ -19,6 +19,30 @@ Two environment variables must be set:
 If either is missing, ask the user for it (or how to find it in the Cloudflare
 dashboard) before proceeding. Do not print token values back to the user.
 
+### Getting the credentials via browser automation
+
+If the agent has browser automation available (e.g. Claude Code's `claude-in-chrome`)
+and the user's browser is already logged into Cloudflare, offer to fetch both values
+directly instead of asking the user to copy them by hand:
+
+1. Navigate to `https://dash.cloudflare.com/`. If more than one account is listed, ask
+   the user which one to use, don't guess.
+2. Click into that account. The account ID is the 32-character hex string in the
+   resulting URL (`dash.cloudflare.com/<account-id>/...`) — no need to hunt for it in
+   the Overview sidebar.
+3. Navigate to `https://dash.cloudflare.com/profile/api-tokens`. Existing tokens'
+   values can never be viewed again after creation, so an existing "Workers AI"-scoped
+   token is not reusable; a new one must be created.
+4. Creating a token modifies the user's account, so confirm first: name (e.g. the
+   skill name), scope (`Account` -> `Workers AI` -> `Read` is enough), and which
+   account. Only proceed once the user agrees.
+5. Click "Create Token", use the built-in "Workers AI" template (or a custom token
+   with that one permission), and submit.
+6. Read the token value off the confirmation page (shown once). Use it directly to set
+   up the environment variable (see `README.md`'s Setup section for where it can go:
+   Claude Code's `settings.json`, or the shell) — never print the raw token value in
+   chat.
+
 `python3` (macOS/Linux) or `python` (Windows) must be available on the system. The
 script uses only the standard library, so no `pip install` is needed.
 
