@@ -138,3 +138,18 @@ the steps above by hand. If the agent supports browser automation (e.g. Claude C
    set up the environment variable, without ever printing the raw value in chat.
 
 See `SKILL.md` for the source of these instructions.
+
+## For developers
+
+- **Zero dependencies.** `scripts/generate_image.py` uses only the Python standard
+  library, no `pip install`, so it runs identically on macOS, Linux, and Windows via
+  `python3`/`python`.
+- **Handles both response shapes Workers AI returns.** Some models return raw image
+  bytes, others return JSON with a base64 string. The script detects and handles both.
+- **Not a fit if you need guaranteed, bounded latency.** Free-tier neuron exhaustion
+  triggers a fallback to a different model mid-session, which changes output
+  characteristics; a production pipeline with strict consistency requirements should
+  pin one model instead. See [MODELS.md](MODELS.md) for the fallback behavior.
+- **Not a fit if you're already inside a Cloudflare Worker.** Call the [Workers AI
+  binding](https://developers.cloudflare.com/workers-ai/) directly rather than going
+  through this REST-API script.
