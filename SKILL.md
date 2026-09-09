@@ -19,7 +19,8 @@ Two environment variables must be set:
 If either is missing, ask the user for it (or how to find it in the Cloudflare
 dashboard) before proceeding. Do not print token values back to the user.
 
-`jq` and `curl` must be available on the system.
+`python3` (macOS/Linux) or `python` (Windows) must be available on the system. The
+script uses only the standard library, so no `pip install` is needed.
 
 ## Steps
 
@@ -27,10 +28,10 @@ dashboard) before proceeding. Do not print token values back to the user.
    descriptive prompt before generating.
 2. Pick an output path. Default to a `.png` file named after the prompt (kebab-case) in
    the current directory unless the user specifies one.
-3. Run the script:
+3. Run the script (`python3` on macOS/Linux, `python` on Windows):
 
    ```bash
-   scripts/generate-image.sh "<prompt>" "<output-file>" ["<model>"]
+   python3 scripts/generate_image.py "<prompt>" "<output-file>" ["<model>"]
    ```
 
    Model defaults to `@cf/black-forest-labs/flux-1-schnell`. Other useful models:
@@ -44,6 +45,8 @@ dashboard) before proceeding. Do not print token values back to the user.
 ## Notes
 
 - Different models return the image differently (raw bytes vs. JSON with base64) -
-  `scripts/generate-image.sh` already handles both, so prefer it over ad-hoc `curl`.
+  `scripts/generate_image.py` already handles both, so prefer it over ad-hoc requests.
+- The script is pure Python standard library, so it runs the same way on macOS, Linux,
+  and Windows.
 - Full model list and parameters: https://developers.cloudflare.com/workers-ai/models/
   (filter by task "Text-to-Image").
