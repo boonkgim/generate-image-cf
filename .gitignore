@@ -1,39 +1,60 @@
 # OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
 Thumbs.db
+ehthumbs.db
+desktop.ini
 
 # Editors / IDEs
-.vscode/
 .idea/
+.vscode/
 *.swp
 *.swo
 *~
+*.sublime-workspace
 
 # Environment / secrets
 .env
 .env.*
 !.env.example
+*.pem
+*.key
 .claude/settings.local.json
 
 # Logs
 *.log
 logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Dependencies
+# Dependencies / build output
 node_modules/
-vendor/
-__pycache__/
-*.pyc
-.venv/
-venv/
-
-# Build output
 dist/
 build/
 out/
-*.egg-info/
+target/
+vendor/
+.cache/
+coverage/
 
-# Temp files
-*.tmp
-*.temp
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Temp
 tmp/
+temp/
+*.tmp
+*.bak
