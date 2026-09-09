@@ -1,7 +1,8 @@
 # generate-image-cf
 
-An [agent skill](https://agentskills.io) that generates an image from a text prompt
-using Cloudflare Workers AI, called directly from your AI agent.
+Claude Code and some coding agents can't generate images out of the box. This
+[agent skill](https://agentskills.io) closes that gap: it generates an image from a text
+prompt using Cloudflare Workers AI, called directly from your AI agent.
 
 It sharpens a vague prompt, generates the image, and saves it locally. Defaults to the
 model that looked best against the free alternatives in testing; switches automatically
