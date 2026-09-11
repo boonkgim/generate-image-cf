@@ -46,6 +46,14 @@ There are two ways to do this: via Claude Code's own `settings.json`, or directl
 your shell. Either way, only ever put your *actual* token in a location that never gets
 committed, listed below.
 
+For use with an agent (Claude Code sessions, subagents included), prefer **Option A**.
+A plain shell `export` (Option B) only lives in the process it was run in — a fresh
+terminal, a new Claude Code session, or a subagent's own shell won't see it unless it's
+also in a shell rc file, and even then an *already-running* session's shell was spawned
+before that rc file was edited, so it still won't pick it up until a new one starts.
+`settings.json`'s `env` block is read by Claude Code itself at session start and applied
+to every tool call (including subagents), so it doesn't have that gap.
+
 ### Option A: Claude Code settings.json
 
 Claude Code reads environment variables from an `env` object in its own settings files.
