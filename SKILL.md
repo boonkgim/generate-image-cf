@@ -58,18 +58,14 @@ script uses only the standard library, so no `pip install` is needed.
    python3 scripts/generate_image.py "<prompt>" "<output-file>" ["<model>"]
    ```
 
-   Model defaults to `@cf/black-forest-labs/flux-1-schnell` (best output quality of the
-   models tested). If the account's 10,000/day free neuron allocation runs out on that
-   model, the script automatically falls back to `@cf/bytedance/stable-diffusion-xl-lightning`,
-   which is not neuron-metered, so generation keeps working for the rest of the day. Other
-   useful models:
-   - `@cf/stabilityai/stable-diffusion-xl-base-1.0`
-   - `@cf/lykon/dreamshaper-8-lcm`
-   - `@cf/bytedance/stable-diffusion-xl-lightning`
+   Model defaults to `@cf/black-forest-labs/flux-1-schnell`. The optional model
+   argument must be a currently available model compatible with this script's
+   JSON `prompt` request. Check [model guidance](docs/MODELS.md) before changing it.
 
-4. Report the saved file path to the user, and mention if the fallback model was used
-   (the script prints this to stderr). If the script errors for any other reason, surface
-   the Cloudflare API error message rather than retrying blindly.
+4. Report the saved file path. If the daily neuron allocation is exhausted
+   (HTTP 429, code 4006), the script stops without retrying or changing models.
+   Explain the error; do not change the account plan or retry a different model
+   without the user's agreement on any cost and output changes.
 
 ## Notes
 
@@ -77,9 +73,7 @@ script uses only the standard library, so no `pip install` is needed.
   `scripts/generate_image.py` already handles both, so prefer it over ad-hoc requests.
 - The script is pure Python standard library, so it runs the same way on macOS, Linux,
   and Windows.
-- `flux-1-schnell` costs real neurons (~173/image at default settings, confirmed via the
-  API's `cf-ai-neurons` header); `stable-diffusion-xl-base-1.0`, `stable-diffusion-xl-lightning`,
-  and `dreamshaper-8-lcm` are all confirmed unmetered (0 neurons), so they don't draw down
-  the daily budget at all.
+- Model pricing and free allocations can change; consult the current pricing page
+  linked in [model guidance](docs/MODELS.md). No fallback is assumed to be free.
 - Full model list and parameters: https://developers.cloudflare.com/workers-ai/models/
   (filter by task "Text-to-Image").

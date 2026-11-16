@@ -97,31 +97,15 @@
     "gaps": [],
     "updated": "2026-11-01T22:22:18.456560+00:00",
     "last_run": {
-      "id": "4cc57e9a316241dd984cdd040f33808f",
-      "operation": "verify-git",
-      "started_at": "2026-11-01T22:22:17.910525+00:00",
-      "status": "succeeded",
-      "finished_at": "2026-11-01T22:22:18.457828+00:00",
-      "files": 9
-    },
-    "last_successful_run": {
-      "id": "4cc57e9a316241dd984cdd040f33808f",
-      "operation": "verify-git",
-      "started_at": "2026-11-01T22:22:17.910525+00:00",
-      "status": "succeeded",
-      "finished_at": "2026-11-01T22:22:18.457828+00:00",
-      "files": 9
-    },
-    "last_successful_scan": {
-      "id": "bd4e41626e504727999c65b5bb9422a7",
+      "id": "9035c3f2210e43f2aa8bdf9bf020b174",
       "operation": "audit",
-      "started_at": "2026-11-01T22:22:17.865767+00:00",
+      "started_at": "2026-11-16T13:46:22.637520+00:00",
       "status": "succeeded",
-      "finished_at": "2026-11-01T22:22:17.874038+00:00",
+      "finished_at": "2026-11-16T13:46:22.645273+00:00",
       "changes": {
-        "new": 9,
-        "modified": 0,
-        "unchanged": 0,
+        "new": 1,
+        "modified": 6,
+        "unchanged": 3,
         "removed": 0,
         "no-longer-scanned": 0,
         "unsupported": 0
@@ -129,11 +113,61 @@
       "git_discovery": {
         "status": "cross-checked",
         "tracked_count": 10,
-        "untracked_count": 0,
-        "ignored_candidates_count": 1,
-        "newly_ignored_candidates_count": 0,
+        "untracked_count": 1,
+        "ignored_candidates_count": 2,
+        "newly_ignored_candidates_count": 1,
         "not_scanned_tracked_or_untracked_count": 0,
-        "ignored_candidates_excluded_from_scan_count": 1,
+        "ignored_candidates_excluded_from_scan_count": 2,
+        "ignore_source_changes_count": 0
+      }
+    },
+    "last_successful_run": {
+      "id": "9035c3f2210e43f2aa8bdf9bf020b174",
+      "operation": "audit",
+      "started_at": "2026-11-16T13:46:22.637520+00:00",
+      "status": "succeeded",
+      "finished_at": "2026-11-16T13:46:22.645273+00:00",
+      "changes": {
+        "new": 1,
+        "modified": 6,
+        "unchanged": 3,
+        "removed": 0,
+        "no-longer-scanned": 0,
+        "unsupported": 0
+      },
+      "git_discovery": {
+        "status": "cross-checked",
+        "tracked_count": 10,
+        "untracked_count": 1,
+        "ignored_candidates_count": 2,
+        "newly_ignored_candidates_count": 1,
+        "not_scanned_tracked_or_untracked_count": 0,
+        "ignored_candidates_excluded_from_scan_count": 2,
+        "ignore_source_changes_count": 0
+      }
+    },
+    "last_successful_scan": {
+      "id": "9035c3f2210e43f2aa8bdf9bf020b174",
+      "operation": "audit",
+      "started_at": "2026-11-16T13:46:22.637520+00:00",
+      "status": "succeeded",
+      "finished_at": "2026-11-16T13:46:22.645273+00:00",
+      "changes": {
+        "new": 1,
+        "modified": 6,
+        "unchanged": 3,
+        "removed": 0,
+        "no-longer-scanned": 0,
+        "unsupported": 0
+      },
+      "git_discovery": {
+        "status": "cross-checked",
+        "tracked_count": 10,
+        "untracked_count": 1,
+        "ignored_candidates_count": 2,
+        "newly_ignored_candidates_count": 1,
+        "not_scanned_tracked_or_untracked_count": 0,
+        "ignored_candidates_excluded_from_scan_count": 2,
         "ignore_source_changes_count": 0
       }
     },

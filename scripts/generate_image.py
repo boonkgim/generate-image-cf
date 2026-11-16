@@ -16,9 +16,6 @@ import urllib.error
 import urllib.request
 
 DEFAULT_MODEL = "@cf/black-forest-labs/flux-1-schnell"
-# Not neuron-metered (confirmed via the cf-ai-neurons response header), so it keeps
-# working once the 10,000/day free neuron allocation on DEFAULT_MODEL runs out.
-FALLBACK_MODEL = "@cf/bytedance/stable-diffusion-xl-lightning"
 NEURON_ALLOCATION_EXHAUSTED_CODE = 4006
 
 
@@ -68,19 +65,13 @@ def main():
         content_type, data = call_model(account_id, api_token, model, args.prompt)
     except urllib.error.HTTPError as e:
         error_body = e.read()
-        if e.code == 429 and model != FALLBACK_MODEL and is_neuron_allocation_exhausted(error_body):
-            print(
-                f"Daily free neuron allocation used up on {model}; "
-                f"falling back to {FALLBACK_MODEL} (not neuron-metered).",
-                file=sys.stderr,
+        if e.code == 429 and is_neuron_allocation_exhausted(error_body):
+            sys.exit(
+                "Daily Workers AI neuron allocation exhausted (HTTP 429, code 4006). "
+                "No fallback was attempted. Wait for the allocation to reset or "
+                "review your Cloudflare plan and budget before retrying."
             )
-            model = FALLBACK_MODEL
-            try:
-                content_type, data = call_model(account_id, api_token, model, args.prompt)
-            except urllib.error.HTTPError as e2:
-                sys.exit(f"Cloudflare API error ({e2.code}): {e2.read().decode('utf-8', 'replace')}")
-        else:
-            sys.exit(f"Cloudflare API error ({e.code}): {error_body.decode('utf-8', 'replace')}")
+        sys.exit(f"Cloudflare API error ({e.code}): {error_body.decode('utf-8', 'replace')}")
 
     if content_type.startswith("image/"):
         # Some models (e.g. Stable Diffusion) return raw image bytes directly.

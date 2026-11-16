@@ -154,10 +154,9 @@ See `SKILL.md` for the source of these instructions.
   `python3`/`python`.
 - **Handles both response shapes Workers AI returns.** Some models return raw image
   bytes, others return JSON with a base64 string. The script detects and handles both.
-- **Not a fit if you need guaranteed, bounded latency.** Free-tier neuron exhaustion
-  triggers a fallback to a different model mid-session, which changes output
-  characteristics; a production pipeline with strict consistency requirements should
-  pin one model instead. See [MODELS.md](MODELS.md) for the fallback behavior.
+- **Quota exhaustion stops generation.** HTTP 429 with error code 4006 produces a
+  clear error without a model switch or a second request. See
+  [MODELS.md](MODELS.md) for quota handling and model compatibility.
 - **Not a fit if you're already inside a Cloudflare Worker.** Call the [Workers AI
   binding](https://developers.cloudflare.com/workers-ai/) directly rather than going
   through this REST-API script.

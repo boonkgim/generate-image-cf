@@ -84,6 +84,12 @@
       "route": "github",
       "classification": "ordinary",
       "reviewed": true
+    },
+    {
+      "path": "tests/test_generate_image.py",
+      "route": "github",
+      "classification": "ordinary",
+      "reviewed": true
     }
   ],
   "exceptions": [

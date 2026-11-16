@@ -5,8 +5,8 @@ Claude Code and some coding agents can't generate images out of the box. This
 prompt using Cloudflare Workers AI, called directly from your AI agent.
 
 It sharpens a vague prompt, generates the image, and saves it locally. Defaults to the
-model that looked best against the free alternatives in testing; switches automatically
-to a free model once the daily quota runs out.
+`flux-1-schnell` model. If the daily neuron quota runs out, it stops with a clear
+error instead of switching models.
 
 ## Quick start
 
@@ -64,8 +64,7 @@ text-to-image.
 
 - [docs/SETUP.md](docs/SETUP.md) &mdash; account ID and API token by hand, where to put
   them, and running the script without an agent.
-- [docs/MODELS.md](docs/MODELS.md) &mdash; cost per image for every supported model,
-  verified against the live API.
+- [docs/MODELS.md](docs/MODELS.md) &mdash; model selection, quota handling and current pricing references.
 
 ## Author
 
